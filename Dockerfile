@@ -21,10 +21,10 @@ FROM python:3.11-slim-bookworm AS final
 RUN mkdir /chroma
 WORKDIR /chroma
 RUN addgroup \
-    -S -g 1000 \
+    -g 1000 \
     chroma && \
   adduser \
-    -S -H -D \
+    -H -D \
     -h /chroma \
     -s /bin/bash \
     -u 1000 \
