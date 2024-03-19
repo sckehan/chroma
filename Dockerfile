@@ -10,7 +10,7 @@ RUN apt-get update --fix-missing && apt-get install -y --fix-missing \
     mkdir /install
 
 WORKDIR /install
-RUN groupadd -g 1000 chroma
+
 COPY ./requirements.txt requirements.txt
 
 RUN pip install --no-cache-dir --upgrade --prefix="/install" -r requirements.txt
@@ -20,6 +20,7 @@ FROM python:3.11-slim-bookworm AS final
 
 RUN mkdir /chroma
 WORKDIR /chroma
+RUN groupadd -g 1000 chroma
 
 COPY --from=builder /install /usr/local
 COPY ./bin/docker_entrypoint.sh /docker_entrypoint.sh
