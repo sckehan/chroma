@@ -20,7 +20,7 @@ FROM python:3.11-slim-bookworm AS final
 
 RUN mkdir /chroma
 WORKDIR /chroma
-RUN groupadd -S -g 1000 chroma && adduser -S -H -D -h /chroma -s /bin/bash -u 1000 -G chroma chroma
+RUN groupadd -g 1000 chroma && adduser -H -D -h /chroma -s /bin/bash -u 1000 -G chroma chroma
 
 COPY --from=builder /install /usr/local
 COPY ./bin/docker_entrypoint.sh /docker_entrypoint.sh
