@@ -20,7 +20,7 @@ FROM python:3.11-slim-bookworm AS final
 
 RUN mkdir /chroma
 WORKDIR /chroma
-RUN groupadd -g 1000 chroma
+#RUN groupadd -g 1000 chroma
 RUN adduser -u 1000 chroma
 RUN usermod -a -G chroma chroma
 
