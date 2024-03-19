@@ -20,16 +20,7 @@ FROM python:3.11-slim-bookworm AS final
 
 RUN mkdir /chroma
 WORKDIR /chroma
-RUN addgroup \
-    -g 1000 \
-    chroma && \
-  adduser \
-    -H -D \
-    -h /chroma \
-    -s /bin/bash \
-    -u 1000 \
-    -G chroma \
-    chroma
+
 COPY --from=builder /install /usr/local
 COPY ./bin/docker_entrypoint.sh /docker_entrypoint.sh
 COPY ./ /chroma
@@ -38,8 +29,6 @@ RUN apt-get update --fix-missing && apt-get install -y curl && \
     chmod +x /docker_entrypoint.sh && \
     rm -rf /var/lib/apt/lists/*
     
-# chroma:chroma
-USER 1000:1000
 ENV CHROMA_HOST_ADDR "0.0.0.0"
 ENV CHROMA_HOST_PORT 8000
 ENV CHROMA_WORKERS 1
